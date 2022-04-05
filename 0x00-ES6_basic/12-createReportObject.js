@@ -3,10 +3,12 @@ export default function createReportObject(employeesList) {
     allEmployees: {},
     getNumberOfDepartments(employeesList) {
       return Object.keys(employeesList).length;
-    }
+    },
   };
   for (const prop in employeesList) {
-    report.allEmployees[prop] = employeesList[prop];
+    if ({}.hasOwnProperty.call(employeesList, prop)) {
+      report.allEmployees[prop] = employeesList[prop];
+    }
   }
   return report;
 }

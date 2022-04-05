@@ -1,6 +1,7 @@
 {
   "type": "module",
   "scripts": {
+    "dev": "node ",
     "lint": "./node_modules/.bin/eslint",
     "test": "jest"
   },
