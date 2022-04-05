@@ -1,4 +1,4 @@
-export default function iterateThroughObject (reportWithIterator) {
+export default function iterateThroughObject(reportWithIterator) {
   let empls = '';
 
   for (const empl of reportWithIterator) {
