@@ -1,11 +1,10 @@
 export default class Building {
   constructor(sqft) {
-    if (this.constructor === Building) {
-      Building.checkType(sqft, Number, 'sqrft not a number');
-      this._sqft = sqft;
-    } else if (this.evacuationWarningMessage === undefined) {
+    if (this.constructor !== Building && this.evacuationWarningMessage === undefined) {
       throw new Error('Class extending Building must override evacuationWarningMessage');
     }
+    Building.checkType(sqft, Number, 'sqrft not a number');
+    this._sqft = sqft;
   }
 
   // Getter methods
