@@ -1,5 +1,5 @@
 answer_files.sh
-alx.html
+*.html
 *-main.js
 utils.js
 node_modules/
