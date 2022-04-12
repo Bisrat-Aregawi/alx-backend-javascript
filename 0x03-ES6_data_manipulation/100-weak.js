@@ -5,6 +5,7 @@ const weakMap = new WeakMap();
   * @param {object} endpoint - An endpoint object
   */
 export default function queryAPI(endpoint) {
+  if (typeof endpoint !== 'object') return;
   if (weakMap.has(endpoint)) {
     if (weakMap.get(endpoint) < 5) {
       weakMap.set(
