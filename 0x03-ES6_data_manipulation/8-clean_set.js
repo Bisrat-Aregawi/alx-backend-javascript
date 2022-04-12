@@ -8,12 +8,16 @@
   */
 export default function cleanSet(set, startString) {
   const remnants = [];
-  if (startString && Array.from(set).every((e) => typeof e === 'string')) {
-    set.forEach((elem) => {
-      if (elem.startsWith(startString)) {
-        remnants.push(elem.slice(String(startString).length));
-      }
-    });
+
+  if (set && startString) {
+    if (typeof startString === 'string') {
+      set.forEach((elem) => {
+        if (typeof elem === 'string' && elem.startsWith(startString)) {
+          remnants.push(elem.slice(startString.length));
+        }
+      });
+    }
+    return remnants.join('-');
   }
-  return remnants.filter((e) => e !== '').join('-');
+  return '';
 }
