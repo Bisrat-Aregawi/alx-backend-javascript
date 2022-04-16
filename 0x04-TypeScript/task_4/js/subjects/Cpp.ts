@@ -7,7 +7,11 @@ namespace Subjects {
     /** Teacher's experience teaching C language */
     experienceTeachingC?: number;
   }
+  /** Cpp class extending Subject class */
   export class Cpp extends Subject {
+    /**
+    * getRequirements method for Cpp
+    */
     getRequirements() {
       return 'Here is the list of requirements for Cpp';
     }
