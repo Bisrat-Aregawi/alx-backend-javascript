@@ -4,4 +4,3 @@ answer_files.sh
 utils.js
 node_modules/
 package-lock.json
-.eslintrc.js
