@@ -3,3 +3,5 @@ answer_files.sh
 *-main.js
 utils.js
 node_modules/
+package-lock.json
+.eslintrc.js
