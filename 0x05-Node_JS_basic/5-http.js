@@ -13,16 +13,17 @@ const port = 1245;
 const app = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  if (req.url === '/') {
-    res.end('Hello Holberton School!');
-  } else if (req.url === '/students') {
+  if (req.url === '/students') {
     countStudents(process.argv[2])
       .then((data) => {
+        const summary = `This is the list of our students\n${data.join('\n')}`;
+        res.setHeader('Content-Length', summary.length);
         res.end(`This is the list of our students\n${data.join('\n')}`);
-      })
-      .catch((err) => {
-        res.end(err.message);
       });
+  } else {
+    const resText = 'Hello Holberton School!';
+    res.setHeader('Content-Length', resText.length);
+    res.end(resText);
   }
 });
 
