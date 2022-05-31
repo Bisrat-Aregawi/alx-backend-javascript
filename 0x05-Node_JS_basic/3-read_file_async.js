@@ -9,32 +9,40 @@ const fs = require('fs').promises;
  * @returns {promise} promise
  */
 async function countStudents(path) {
-  return fs.readFile(path, 'utf-8')
-    .then((data) => {
-      // Construct records array
-      const records = data.split('\n').map((line) => line.split(','));
-      // Remove trailing newline array
-      records.pop();
-      // Construct records object
-      const recObj = {};
-      // Prepare field keys for `recObj`
-      records.slice(1).forEach((record) => {
-        recObj[record[record.length - 1]] = [];
+  return new Promise((resolve, reject) => {
+    fs.readFile(path, 'utf-8')
+      .then((data) => {
+        // Construct records array
+        const records = data.split('\n').map((line) => line.split(','));
+        // Remove trailing newline array
+        records.pop();
+        // Construct records object
+        const recObj = {};
+        // Prepare field keys for `recObj`
+        records.slice(1).forEach((record) => {
+          recObj[record[record.length - 1]] = [];
+        });
+        // Populate fields array with corresponding first names
+        records.slice(1).forEach((record) => {
+          recObj[record[record.length - 1]].push(record[0]);
+        });
+        // Construct a summary to return on resolve
+        const summary = [];
+        // Log number of students in database and append to summary
+        summary.push(`Number of students: ${records.slice(1).length}`);
+        console.log(summary[summary.length - 1]);
+        // Log students per field and append to summary
+        Object.keys(recObj).forEach((field) => {
+          summary.push(`Number of students in ${field}: ${recObj[field].length}. List: ${recObj[field].join(', ')}`);
+          console.log(summary[summary.length - 1]);
+        });
+        // Resolve with summary
+        resolve(summary);
+      })
+      .catch(() => {
+        reject(new Error('Cannot load the database'));
       });
-      // Populate fields array with corresponding first names
-      records.slice(1).forEach((record) => {
-        recObj[record[record.length - 1]].push(record[0]);
-      });
-      // Log number of students in database
-      console.log(`Number of students: ${records.slice(1).length}`);
-      // Log students per field
-      Object.keys(recObj).forEach((field) => {
-        console.log(`Number of students in ${field}: ${recObj[field].length}. List: ${recObj[field].join(', ')}`);
-      });
-    })
-    .catch(() => {
-      throw new Error('Cannot load the database');
-    });
+  });
 }
 
 module.exports = countStudents;
