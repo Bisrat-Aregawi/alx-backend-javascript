@@ -1,7 +1,6 @@
 answer_files.sh
 *.html
 *-main.js
-utils.js
 node_modules/
 package-lock.json
 *.csv
